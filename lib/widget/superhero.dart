@@ -3,7 +3,8 @@ import 'package:superhero_app/info_hero/heroitem.dart';
 import 'package:superhero_app/screens/details.dart';
 import 'package:superhero_app/widget/superhero_avatar.dart';
 
-class SuperHero extends StatelessWidget {
+// ignore: must_be_immutable
+class SuperHero extends StatefulWidget {
   HeroItem heroItem;
 
   SuperHero({
@@ -12,6 +13,11 @@ class SuperHero extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _SuperHeroState createState() => _SuperHeroState();
+}
+
+class _SuperHeroState extends State<SuperHero> {
+  @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -19,7 +25,7 @@ class SuperHero extends StatelessWidget {
       onTap: () {
         var router = new MaterialPageRoute(builder: (BuildContext context) {
           return Details(
-            heroItem: heroItem,
+            heroItem: widget.heroItem,
           );
         });
 
@@ -42,8 +48,8 @@ class SuperHero extends StatelessWidget {
                     width: 12.0,
                   ),
                   Hero(
-                    tag: heroItem.id,
-                    child: SuperheroAvatar(img: heroItem.images.md),
+                    tag: widget.heroItem.id,
+                    child: SuperheroAvatar(img: widget.heroItem.images.md),
                   ),
                   SizedBox(
                     width: 24.0,
@@ -56,14 +62,14 @@ class SuperHero extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "${heroItem.name}",
-                            style: textTheme.title,
+                            "${widget.heroItem.name}",
+                            style: textTheme.headline6,
                           ),
                           Text(
-                            heroItem.biography.fullName.isEmpty
-                                ? heroItem.name
-                                : heroItem.biography.fullName,
-                            style: textTheme.subtitle.copyWith(
+                            widget.heroItem.biography.fullName.isEmpty
+                                ? widget.heroItem.name
+                                : widget.heroItem.biography.fullName,
+                            style: textTheme.subtitle2.copyWith(
                               fontWeight: FontWeight.w300,
                             ),
                           ),
@@ -78,7 +84,7 @@ class SuperHero extends StatelessWidget {
                               ),
                               Flexible(
                                 child: Text(
-                                  "${heroItem.biography.publisher}",
+                                  "${widget.heroItem.biography.publisher}",
                                   style: textTheme.caption,
                                 ),
                               ),

@@ -1,4 +1,4 @@
 class Constants {
   //App related strings
-  static String appName = "Superheroes";
+  static String appName = "Super Heroes";
 }
